@@ -1,13 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
 
-import { siteConfig } from "@/config/site"
+import { siteConfig } from "@/config/site";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { cn } from "@/lib/utils"
-import { SiteHeader } from "@/components/site-header"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
-
+import { cn } from "@/lib/utils";
+import { SiteHeader } from "@/components/site-header";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,10 +16,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
@@ -29,30 +25,8 @@ export const metadata: Metadata = {
 };
 
 interface RootLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
-
-
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   return (
-//     <html lang="en">
-//       <body className={inter.className}>
-//         <ThemeProvider
-//           attribute="class"
-//           defaultTheme="dark"
-//           enableSystem
-//           disableTransitionOnChange
-//         >
-//           {children}
-//         </ThemeProvider>
-//       </body>
-//     </html>
-//   );
-// }
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
@@ -65,7 +39,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             inter.className
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <div className="flex-1">{children}</div>
@@ -75,5 +54,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </body>
       </html>
     </>
-  )
+  );
 }
